@@ -1,0 +1,8 @@
+zip -r myhtml.zip ./*.html
+scp -i linux_kp.pem  -o StrictHostKeyChecking=no myhtml.zip ec2-user@3.82.100.1:.
+ssh -i linux_kp.pem  -o StrictHostKeyChecking=no ec2-user@3.82.100.1 << EOF 
+sudo cp myhtml.zip /usr/share/nginx/html/
+cd /usr/share/nginx/html
+sudo rm  *.html
+sudo unzip myhtml.zip -d . 
+EOF
